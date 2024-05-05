@@ -1,0 +1,15 @@
+{
+    "name": "MySoul Collection #1",
+    "description": "A collection mirror of MySoul",
+    "image": "https://peach-managing-marmot-708.mypinata.cloud/ipfs/QmTRgaQp6CHRS4CgjiwPCL7wDhNDPFS6oChBfLCCgDGXA5/2-Life.jpeg",
+    "attributes": [
+        {
+            "trait_type": "Soul",
+            "value": "Routine"
+        },
+        {
+            "trait_type": "Name",
+            "value": "Life"
+        }
+    ]
+}
