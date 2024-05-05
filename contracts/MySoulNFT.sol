@@ -35,7 +35,7 @@ contract MySoulNFT is ERC721, ERC721Enumerable, ERC721URIStorage, ERC721Pausable
     }
 
     function _baseURI() internal pure override returns (string memory) {
-        return "https://my-nft-api.com/token/";
+        return "https://peach-managing-marmot-708.mypinata.cloud/ipfs/QmUUS9a8V4g4rkX5Xo8AoEPuUP4posYKcrsbkGYU7UDLvM/";
         //check uri
     }
 

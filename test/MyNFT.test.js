@@ -1,9 +1,9 @@
-const { BigNumber, costants } = require("ethers");
-const { AddressZero, EtherSymbol } = costants;
+const { BigNumber, constants } = require("ethers");
+const { AddressZero, EtherSymbol } = constants;
 
 const { expect } = require("chai");
 
-require("@naomicfoundation/hardhat-chai-matchers");
+require("@nomicfoundation/hardhat-chai-matchers");
 
 let nftToken,
   creator,
@@ -16,7 +16,8 @@ let nftToken,
 describe("MySoulNFT test", function (accounts) {
   const name = "MySoulNFT";
   const symbol = "MSN";
-  const baseURI = "https://my-soul-nft.com/";
+  const baseURI =
+    "https://peach-managing-marmot-708.mypinata.cloud/ipfs/QmUUS9a8V4g4rkX5Xo8AoEPuUP4posYKcrsbkGYU7UDLvM/";
 
   // beforeEach(async function() {
   it("token setup", async function () {
@@ -48,14 +49,14 @@ describe("MySoulNFT test", function (accounts) {
 
       const receipt = await ethers.provider.getTransactionReceipt(tx.hash);
       transferEventInterface = new ethers.utils.Interface([
-        "event Transfer(address indexed from, address indexed to, uint256 tokenId)",
+        "event Transfer(address indexed from, address indexed to, uint256 indexed tokenId)",
       ]);
       const data = receipt.logs[0].data;
       const topics = receipt.logs[0].topics;
       event = transferEventInterface.decodeEventLog("Transfer", data, topics);
-      expect(event.from).to.be.equal(AddressZero);
-      expect(event.to).to.be.equal(other1.address);
-      expect(event.tokenId.toString()).to.be.equal("1");
+      expect(event.from).to.equal(AddressZero);
+      expect(event.to).to.equal(other1.address);
+      expect(event.tokenId.toString()).to.equal("1");
 
       expect(await nftToken.balanceOf(other1.address)).to.be.equal(
         BigNumber.from("1")
@@ -106,11 +107,11 @@ describe("MySoulNFT test", function (accounts) {
       }
       await expect(
         nftToken.connect(creator).mint(other1.address)
-      ).to.be.revertedWithCustomError(nftToken, "MaxSupplyReached");
+      ).to.be.revertedWithCustomError(nftToken, "maxSupplyReached");
     });
   });
 
-  describe("creator pause and unpause thecontract", function () {
+  describe("creator can pause and unpause the contract", function () {
     it("pause the contract", async function () {
       await nftToken.connect(creator).pause();
       expect(await nftToken.paused()).to.be.equal(true);
